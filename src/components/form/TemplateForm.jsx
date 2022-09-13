@@ -10,7 +10,7 @@ export const TemplateForm = memo(() => {
   const [selectValue, setSelectValue] = useState(SELECT_VALUES[1]);
   /** TextFields についての state */
   const [textValue, setTextValue] = useState(initialTextValue);
-  /** button　についての　state
+  /** button　押下可否についての　state
    * フォームが空の時、ボタンを押下できないようにする
    */
   const [disable, setDisable] = useState(true);
@@ -30,6 +30,7 @@ export const TemplateForm = memo(() => {
       ...textValue,
       [event.target.name]: event.target.value,
     }))
+    setDisable(event.target.value === "" ? true : false);
   }, []);
 
   console.log(textValue);
@@ -38,12 +39,6 @@ export const TemplateForm = memo(() => {
   const handleClickButton = useCallback(() => {
     alert(`${selectValue.value}: ${textValue[selectValue.value]}`);
   }, [selectValue, textValue]);
-
-
-
-  function handleChange(event) {
-    setDisable(event.target.value === "");
-  }
 
 
   return (
@@ -62,13 +57,8 @@ export const TemplateForm = memo(() => {
         title={selectValue}
         outputValue={textValue}
         handleClick={handleClickButton}
-
+        disabled={disable}
       />
-
-            <div>
-        Password: <input onChange={handleChange} /> <br />
-        <button disabled={disable}>Reset</button>
-      </div>
     </>
   );
 });

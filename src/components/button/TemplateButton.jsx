@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 export const TemplateButton = (props) => {
-  const { disabled, outputValue, handleClick, title } = props;
+  const { disabled, handleClick, title } = props;
 
   return (
     <Stack spacing={2} direction="row">
